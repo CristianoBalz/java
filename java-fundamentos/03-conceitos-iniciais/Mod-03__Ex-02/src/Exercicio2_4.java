@@ -1,4 +1,4 @@
-
+import java.util.stream.IntStream;
 
 public class Exercicio2_4 {
 
@@ -19,5 +19,14 @@ public class Exercicio2_4 {
 				cont++;
 			}
 		}
+		
+		
+		/* mais simples */
+		for(int i = 1; i <= 10; i++) {
+			System.out.println(i * 9);
+		}
+		
+		/* usando stream*/		
+		IntStream.range(1, 11).map(n -> n * 9).forEach(System.out::println);
 	}
 }

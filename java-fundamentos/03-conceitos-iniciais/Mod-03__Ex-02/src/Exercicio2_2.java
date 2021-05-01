@@ -1,4 +1,4 @@
-
+import java.util.stream.IntStream;
 
 public class Exercicio2_2 {
 
@@ -14,5 +14,9 @@ public class Exercicio2_2 {
 		}
 		
 		System.out.println(soma);
+		System.out.println(IntStream.range(1, 101)
+				.filter(n -> n % 2 != 0)
+				.reduce(0,(x,y) -> x + y ));
+		
 	}
 }
