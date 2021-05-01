@@ -2,5 +2,6 @@
 /RemoteSystemsTempFiles
 bin/
 target/
+/teste
 *.classpath
 *.class
