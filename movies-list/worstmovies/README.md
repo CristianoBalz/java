@@ -29,12 +29,12 @@ Observação: Este comando irá compilar o código fonte da API e gerar o execut
 
 Junto ao executável jar deve existir o arquivo `movielist.csv` com a listagem dos filmes. Este arquivo deve seguir o padrão abaixo:
 
-``
+`
 year;title;studios;producers;winner   
 1980;Can't Stop the Music;Associated Film Distribution;Allan Carr;yes    
 1980;Cruising;Lorimar Productions, United Artists;Jerry Weintraub;    
 ...
-``
+`
 
 Importante: sem este arquivo a aplicação não poderá ser iniciada.
 
