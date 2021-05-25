@@ -1,1 +1,0 @@
-CREATE TABLE movie AS SELECT * FROM CSVREAD('classpath:movielist-test.csv', null, 'charset=UTF-8 fieldSeparator=;');

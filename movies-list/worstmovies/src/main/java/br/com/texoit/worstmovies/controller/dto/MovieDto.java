@@ -3,6 +3,8 @@ package br.com.texoit.worstmovies.controller.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+
 import br.com.texoit.worstmovies.model.Movie;
 
 public class MovieDto {
@@ -39,6 +41,10 @@ public class MovieDto {
 	
 	public static List<MovieDto> converter(List<Movie> movies) {
 		return movies.stream().map(MovieDto::new).collect(Collectors.toList());
+	}
+	
+	public static Page<MovieDto> converter(Page<Movie> movies) {
+		return movies.map(MovieDto::new);
 	}
 
 	@Override
