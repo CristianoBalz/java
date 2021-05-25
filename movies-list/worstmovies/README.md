@@ -29,12 +29,12 @@ Observação: Este comando irá compilar o código fonte da API e gerar o execut
 
 Junto ao executável jar deve existir o arquivo `movielist.csv` com a listagem dos filmes. Este arquivo deve seguir o padrão abaixo:
 
-``
+```
 year;title;studios;producers;winner
 1980;Can't Stop the Music;Associated Film Distribution;Allan Carr;yes
 1980;Cruising;Lorimar Productions, United Artists;Jerry Weintraub;
 ...
-``
+```
 
 Importante: sem este arquivo a aplicação não poderá ser iniciada.
 
@@ -53,11 +53,14 @@ Para certificar que a API esteja funcionando corretamente abra um navegador de i
 - Endpoint que retorna o produtor dos filmes com maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido
 
 URL: `http://{DOMAIN}:8080/producers/prize-range`
+
 Exemplo de retorno:
-``{"min":[{"producer":"Joel Silver","interval":1,"previousWin":1990,"followingWin":1991}],"max":[{"producer":"Matthew Vaughn","interval":13,"previousWin":2002,"followingWin":2015}]}``
+
+```{"min":[{"producer":"Joel Silver","interval":1,"previousWin":1990,"followingWin":1991}],"max":[{"producer":"Matthew Vaughn","interval":13,"previousWin":2002,"followingWin":2015}]}```
 
 - Endpoint que retorna a listagem paginada dos filmes que estão carregados no banco em memória.
 
 URL: `http://{DOMAIN}:8080/movies/list?size=2`
+
 Exemplo de retorno:
-``{"content":[{"year":2019,"title":"The Fanatic","studios":"Quiver Distribution","producers":"Daniel Grodnik, Oscar Generale, and Bill Kenwright"},{"year":2019,"title":"Cats","studios":"Universal Pictures","producers":"Debra Hayward, Tim Bevan, Eric Fellner, and Tom Hooper"}],"pageable":{"sort":{"unsorted":false,"sorted":true,"empty":false},"offset":0,"pageNumber":0,"pageSize":2,"unpaged":false,"paged":true},"totalElements":206,"totalPages":103,"last":false,"size":2,"number":0,"sort":{"unsorted":false,"sorted":true,"empty":false},"numberOfElements":2,"first":true,"empty":false}``
+```{"content":[{"year":2019,"title":"The Fanatic","studios":"Quiver Distribution","producers":"Daniel Grodnik, Oscar Generale, and Bill Kenwright"},{"year":2019,"title":"Cats","studios":"Universal Pictures","producers":"Debra Hayward, Tim Bevan, Eric Fellner, and Tom Hooper"}],"pageable":{"sort":{"unsorted":false,"sorted":true,"empty":false},"offset":0,"pageNumber":0,"pageSize":2,"unpaged":false,"paged":true},"totalElements":206,"totalPages":103,"last":false,"size":2,"number":0,"sort":{"unsorted":false,"sorted":true,"empty":false},"numberOfElements":2,"first":true,"empty":false}```
