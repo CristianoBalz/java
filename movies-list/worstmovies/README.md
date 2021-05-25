@@ -31,7 +31,9 @@ Junto ao executável jar deve existir o arquivo `movielist.csv` com a listagem d
 
 ``
 year;title;studios;producers;winner
+
 1980;Can't Stop the Music;Associated Film Distribution;Allan Carr;yes
+
 1980;Cruising;Lorimar Productions, United Artists;Jerry Weintraub;
 ...
 ``
