@@ -2,6 +2,7 @@ package br.com.texoit.worstmovies.business;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -42,13 +43,12 @@ public class MovieBusiness {
 				extractProducersWinnerByInterval(listProducersWinnerInterval);
 			
 		Optional<Entry<Integer, List<ProducerWinnerIntervalDto>>> minInterval = 
-				producersWinnerByInterval.entrySet().stream().findFirst();
+				producersWinnerByInterval.entrySet().stream().min(Comparator.comparingInt(Map.Entry::getKey));
 		
 		Optional<Entry<Integer, List<ProducerWinnerIntervalDto>>> maxInterval	= 
 				producersWinnerByInterval.size() > 0 ? 
 						producersWinnerByInterval.entrySet().stream()
-							.skip(producersWinnerByInterval.size() - 1)
-							.findFirst() 
+							.max(Comparator.comparingInt(Map.Entry::getKey)) 
 				: Optional.empty();
 				
 		ProducerWinnerDto producerWinner = new ProducerWinnerDto();
