@@ -55,7 +55,7 @@ Observação: Este comando irá compilar o código fonte da API e gerar o execut
 Navegue até o diretório `target`, abra um prompt de comando e rode o comando `java -jar fleets-management-0.0.1-SNAPSHOT.jar` para iniciar a aplicação.
 
 
-**Importante **
+**Importante**
 - A API roda na porta `8080`, portanto, certifique que nenhum outro serviço esteja rodando nesta porta antes de iniciar a aplicação.
 
 PRONTO!! A aplicação já deverá estar de pé e rodando.
