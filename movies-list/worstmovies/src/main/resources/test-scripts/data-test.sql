@@ -1,1 +1,0 @@
-INSERT INTO MOVIE (year, title, studios, producers, winner) SELECT * FROM CSVREAD('classpath:test-scripts/movielist-test.csv', null, 'charset=UTF-8 fieldSeparator=;');
