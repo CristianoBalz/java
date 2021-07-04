@@ -1,11 +1,39 @@
-# WorstList
+# Fleets Management API
 
-API Rest desenvolvida em Java usando Spring Boot Versão 2.5 e JDK_8 e Maven como controlador de dependências.
-Esta API lê um arquivo CSV que contém uma lista de filmes indicados e vencedores da categoria Pior Filme do Golden Raspberry Awards e insere os dados desta lista em uma base de dados H2 em memória ao iniciar a aplicação.
+API Rest desenvolvida em Java usando Spring Boot Versão 2.5, JDK_8, Maven como controlador de dependências e H2 Database como banco de dados.
+Esta API Rest é responsável pelo cadastro e manipulação de veículos e também pelo cálculo de previsão de gastos de combustível destes veículos, considerando a média de consumo de combustível destes veículos dentro da cidade e em rodovias.
 
-A API possui um endpoint que retorna o produtor dos filmes com maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido.
+A aplicação roda na porta 8080 e pode ser acessada através deste endereço (após iniciada):
 
-E outro endpoint paginado que lista os filmes.
+`http://[DOMAIN]:8080/`
+
+Após iniciar a aplicação, ao acessar o link acima trocando a palavra `[DOMAIN]` pelo dominio em que a aplicação esta rodando, deve ser possível obter o seguinte retorno:
+
+`It's running.`
+
+Este retorno indica que a API esta rodando corretamente. :)
+
+**Importante**
+
+- **Todos os endpoints são autenticados via Bearer JWT (token de autenticação). Usar `login`com valor `admin` e senha `password` com valor `w#XJrPcC` para gerar o token. O token deve ser gerado usando a request responsável por gerar o token de acesso informada na tabela logo abaixo.**
+- **Todos as requests devem possuir no `header` a chave `Authentication` e como valor o token gerado na requisição `http://[DOMAIN]:8080/auth`. O valor na chave `Authentication`  deve conter a palavra `Bearer ` seguida de um `espaço em branco` e concatenada com o `token` gerado. Exemplo: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJSZXN0IEFQSSBGbGVldHMgTWFuYWdlbWVudCIsInN1YiI6IjExNSIsImlhdCI6MTYyNTQzMzQwMywiZXhwIjoxNjI1NTE5ODAzfQ.ai2bUUxLVZITWyuOCxbyENzIPZLUOGrWvwM1bn2ii4E`**
+- **O corpo de todas as requisições via POST devem ser enviadas em formato `JSON` com a chave `Content-Type` igual a `application/json` no `header` da requisição.** 
+
+## Endpoints:
+| URI                                                 |    Método     |  Body                                              |  Finalidade                                        |
+|-----------------------------------------------------|:-------------:|:---------------------------------------------------|:---------------------------------------------------|
+| http://[DOMAIN]:8080/                               |  GET          |                                                    | Verificar se a API está rodando.                   |
+| http://[DOMAIN]:8080/auth                           |  POST         |{ "login":"admin","password": "w#XJrPcC" }          | Realizar a autenticação, retorna o token de acesso |
+| http://[DOMAIN]:8080/vehicle/list                   |  GET          |                                                    | Retorna uma lista paginada dos veículos            |
+| http://[DOMAIN]:8080/vehicle                        |  POST         |{"brand" : "Marca","model" : "Modelo","name" : "Veiculo x","averageHighwayConsumption" : "14.6","averageCityConsumption" : "12.8","fabricationDate" : "12/12/2000"}                                                    | Cadastra um novo veículo           |
+| http://[DOMAIN]:8080/vehicle/{ID}                   |  PUT          |{"name": "Veiculo alterado","model": "Modelo alterado", "brand": "Marca alterada","fabricationDate": "01/01/2021","averageCityConsumption": 25.3,"averageHighwayConsumption": 18.3}                                                    | Atualiza os dados do veículo informado pelo `{ID}`.            |
+| http://[DOMAIN]:8080/vehicle/{ID}                   |  GET          |                                                    | Retorna os dados do veículo informado pelo `{ID}`            |
+| http://[DOMAIN]:8080/vehicle/{ID}                   |  DELETE       |                                                    | Deleta o registro do veículo informado pelo `{ID}`            |
+| http://[DOMAIN]:8080/spending-prevision             |  POST         |  {"gasPrice" : 10.5,	"highwayQuantity": 100.0,"cityQuantity" : 100}                                                  | Retorna uma lista de previsão de gastos de combustível ranqueada pelo valor total previsto.             |
+
+## Instalação 
+
+ - Necessário instalação do Java JDK_8 e Maven.
 
 ## Testes de integração
 
@@ -13,9 +41,6 @@ Para rodar os testes de integração, execute o comando abaixo em um prompt de c
 
 ``mvn clean test``
 
-## Instalação
-
- - Necessário instalação do Java JDK_8 e Maven.
 
 ### Compilação do fonte
 
@@ -23,44 +48,18 @@ Rode o comando Maven abaixo abrindo um prompt de comando no diretório da aplica
 
 ``mvn clean install``
 
-Observação: Este comando irá compilar o código fonte da API e gerar o executável `jar` chamado `worstmovies-0.0.1-SNAPSHOT.jar` na pasta `target`. Caso o comando `mvn` não seja reconhecido pelo prompt de comando o `Maven` deve ser configurado nas variáveis de ambiente.
-
-### Arquivo csv
-
-Junto ao executável jar deve existir o arquivo `movielist.csv` com a listagem dos filmes. Este arquivo deve seguir o padrão abaixo:
-
-```
-year;title;studios;producers;winner
-1980;Can't Stop the Music;Associated Film Distribution;Allan Carr;yes
-1980;Cruising;Lorimar Productions, United Artists;Jerry Weintraub;
-...
-```
-
-Importante: sem este arquivo a aplicação não poderá ser iniciada.
+Observação: Este comando irá compilar o código fonte da API e gerar o executável `jar` chamado `fleets-management-0.0.1-SNAPSHOT.jar` na pasta `target`. Caso o comando `mvn` não seja reconhecido pelo prompt de comando o `Maven` deve ser configurado nas variáveis de ambiente.
 
 ### Executar a API
 
-Navegue até o diretório `target`, abra um prompt de comando e rode o comando `java -jar worstmovies-0.0.1-SNAPSHOT.jar` para iniciar a aplicação.
+Navegue até o diretório `target`, abra um prompt de comando e rode o comando `java -jar fleets-management-0.0.1-SNAPSHOT.jar` para iniciar a aplicação.
 
-Importante: certifique-se de que exista um arquivo chamado `movielist.csv` junto com o arquivo `jar` antes de iniciar a aplicação. A API roda na porta `8080`, portanto, certifique que nenhum outro serviço esteja rodando nesta porta antes de iniciar a aplicação.
+
+**Importante **
+- A API roda na porta `8080`, portanto, certifique que nenhum outro serviço esteja rodando nesta porta antes de iniciar a aplicação.
 
 PRONTO!! A aplicação já deverá estar de pé e rodando.
 
-Para certificar que a API esteja funcionando corretamente abra um navegador de internet e navegue neste endereço `http://localhost:8080` que deverá retornar `It's running.` indicando que a API esta rodando corretamente.
+Para certificar que a API esteja funcionando corretamente abra um navegador de internet e navegue neste endereço `http://{DOMAIN]:8080` que deverá retornar `It's running.` indicando que a API esta rodando corretamente.
 
-## Usage
 
-- Endpoint que retorna o produtor dos filmes com maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido
-
-URL: `http://{DOMAIN}:8080/producers/prize-range`
-
-Exemplo de retorno:
-
-```{"min":[{"producer":"Joel Silver","interval":1,"previousWin":1990,"followingWin":1991}],"max":[{"producer":"Matthew Vaughn","interval":13,"previousWin":2002,"followingWin":2015}]}```
-
-- Endpoint que retorna a listagem paginada dos filmes que estão carregados no banco em memória.
-
-URL: `http://{DOMAIN}:8080/movies/list?size=2`
-
-Exemplo de retorno:
-```{"content":[{"year":2019,"title":"The Fanatic","studios":"Quiver Distribution","producers":"Daniel Grodnik, Oscar Generale, and Bill Kenwright"},{"year":2019,"title":"Cats","studios":"Universal Pictures","producers":"Debra Hayward, Tim Bevan, Eric Fellner, and Tom Hooper"}],"pageable":{"sort":{"unsorted":false,"sorted":true,"empty":false},"offset":0,"pageNumber":0,"pageSize":2,"unpaged":false,"paged":true},"totalElements":206,"totalPages":103,"last":false,"size":2,"number":0,"sort":{"unsorted":false,"sorted":true,"empty":false},"numberOfElements":2,"first":true,"empty":false}```
