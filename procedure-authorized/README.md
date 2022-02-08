@@ -9,9 +9,10 @@ A aplicação roda na porta 8080 e pode ser acessada através deste endereço (a
 
 ## Endereços:
 | URL                                                 |   Finalidade                                        |
+|-----------------------------------------------------|:----------------------------------------------------------------|
 | http://[DOMAIN]:8080/procedure-authorized           | Home do APP, contém um menu superior para acesso as demais funcionalidades                  |
-| http://[DOMAIN]:8080/procedure-authorized/procedure           | Lista os procedimentos cadastrados, onde é possível também cadastrar novos, alterar e excluir                  |
-| http://[DOMAIN]:8080/procedure-authorized/authorized           | Lista as authorizações cadastradas, onde é possível também cadastrar novas e excluir                  |
+| http://[DOMAIN]:8080/procedure-authorized/procedure           | Lista os procedimentos cadastrados, onde é possível também cadastrar novos, alterar e excluir |        
+| http://[DOMAIN]:8080/procedure-authorized/authorized           | Lista as authorizações cadastradas, onde é possível também cadastrar novas e excluir                 |
 
 ## Instalação 
 
