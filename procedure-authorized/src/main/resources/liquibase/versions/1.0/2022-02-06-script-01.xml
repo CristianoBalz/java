@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	
+	<changeSet id="1" author="cristiano.balz">
+		<createTable tableName="authorized">
+			<column name="id" type="int">
+				<constraints primaryKey="true" nullable="false"  primaryKeyName="authorized_pk" />
+			</column>
+			<column name="procedure_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_authorized_procedure" references="procedure(id)"/>				
+			</column>
+			<column name="insert_date" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="authorized_name" type="varchar(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="age" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="sex" type="varchar(1)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>			
+</databaseChangeLog>
+
